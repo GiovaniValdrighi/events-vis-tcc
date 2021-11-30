@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="static/style.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    </head>
+    <body>
+        <div id = "wrap">
+            <div id="header">
+                <div id="title_text">
+                    Methods evaluation
+                </div>
+            </div>
+            <div id="content_top">
+                <div id = "menu">
+                    <div id = "block_content">
+                        <button type = "button" id = "new_method" style = "width:30px;">+</button>
+                        <button type = "button" id = "remove_method" style = "width:30px;">-</button>
+                        <div id ="table_methods">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width = "70">Proj.</th>
+                                        <th width = "110">Optim.</th>
+                                        <th width = "103">Height</th>
+                                        <th width = "102">Zeros</th>
+                                        <th width = "43">\(\lambda_1 \)</th>
+                                        <th width = "43">\(\tau_1 \)</th>
+                                        <th width = "43">\(\tau_2 \)</th>
+                                        <th width = "40" class = "td_error">\( e_I \)</th>
+                                        <th width = "40" class = "td_error">\( e_{I> 0} \)</th>
+                                        <th width = "40" class = "td_error">\( e_{I = 0} \)</th>
+                                        <th width = "40" class = "td_error">\( S \)</th>
+                                        <th width = "40" class = "td_error"> \( e_N \) </th>
+                                        <th width = "40" class = "td_error"> \( e_H \)</th>
+                                        <th width = "40" class = "td_error"> time </th>
+                                    </tr>
+                                </thead>
+                                <tbody id ="table_methods_tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                        <label for = "dataset">Data</label>
+                        <select id = "dataset" name = "dataset">
+                            <option value = "vertical_line">Vertical lines</option>
+                            <option value = "rotated_line">Rotated Lines</option>
+                            <option value = "two_orientation">Two Orientation</option>
+                            <option value = "cross">Cross</option>
+                        </select>
+                        <button type = "button" id = "load">Load</button>
+                        <button type = "button" id = "reset" style = "background-color:#ff3333;">Reset</button>
+                        <button type = "button" id = "update" style = "background-color:#1E90FF;">Update</button></br>
+                        Click to add a point, click with shift to end event.
+                    </div>             
+                </div>
+            </div>
+            <div id ="content_bottom">
+                <div id="bottom_left">
+                    <div id = "data"></div>
+                </div>
+                <div id="bottom_right">
+                    <div id = "data_plot_block">
+                        <div id = "results"></div>
+                    </div>
+                </div>
+            </div>
+            <div id = "text">   
+                <h3>Methods description</h3>
+                <p>We have \( n \) rectangles that will have height equals to \( h_i \) (or equals to \( h'_i \)),
+                    we try to minimize the vertical intersection of rectangles to be next to determined values \( w_{i, j}\) 
+                    by optimizing the vertical coordinate of the center of rectangles \( y_i\).
+                </p>
+                <h4>Greedy</h4>
+                $$ y_1 = h_1/2$$
+                $$  y_i = y_{i - 1} + (h_i + h_{i - 1})/2 - w_{i, i - 1}  \quad \forall i \in \{2, \dots, n\} $$
+                <p><h4>Optimization methods</h4></p>
+                <p>In every method it can be selected the difference function between squared difference and absolute difference, i. e.,
+                for all methods it is defined:</p>
+                $$d(x) = x^2 \text{ or } d(x) = |x|$$
+                <p><h4>Exponential</h4></p>
+                $$f_{i, j}(x) = \begin{cases} e^x \text{ if } w_{i, j} = 0 \\ x \text{ if } w_{i, j} \neq 0 \end{cases}$$
+                $$\min_{y} \sum_{i = 1}^n \sum_{j = i + 1}^n \dfrac{d(w_{i, j} - f_{i, j}(I_{i, j}))}{\min \{h_i, h_j\}}$$
+                $$\begin{split} 
+                \text{sub. to }  &y_i \leq y_{i+1} \quad \forall i \\
+                &y_j - y_i \leq \dfrac{h_i}{2} + \dfrac{h_j}{2} + \sum_{k = i +1}^{j-1} h_k \quad \forall i \neq j \\
+                &I_{i, j} = (y_i + \dfrac{h_i}{2}) - (y_j - \dfrac{h_j}{2}) \quad \text{ if } i < j
+                \end{split}$$
+                <p>If we optmize the height \( l' \) of rectangles, with \( f \) defined above:</p>
+                $$\min_{y, l'} \sum_{i = 1}^n \sum_{j = i + 1}^n \dfrac{d(w_{i, j} - f_{i, j}(I_{i, j}))}{\min \{h_i, h_j\}} + \lambda_1 \sum_{i = 1}^n (h_i - h'_i)^2$$
+                $$\begin{split} 
+                \text{sub. to }  &y_i \leq y_{i+1} \quad \forall i \\
+                &y_j - y_i \leq \dfrac{h'_i}{2} + \dfrac{h'_j}{2} + \sum_{k = i +1}^{j-1} h'_k \quad \forall i \neq j \\
+                &I_{i, j} = (y_i + \dfrac{h'_i}{2}) - (y_j - \dfrac{h'_j}{2}) \quad \text{ if } i < j \\
+                &\tau_1 h_i \leq h'_i \quad \forall i \\
+                &h'_i \leq \tau_2 h_i \quad \forall i
+                \end{split}$$
+                <p><h4>Mixed Integer</h4></p>
+                <p>With \( M \) enoughly big:</p>
+                $$\min_{y, b} \sum_{i = 1}^n \sum_{j = i + 1}^n \dfrac{d(w_{i, j} - I_{i, j})}{\min \{h_i, h_j\}}$$
+                $$\begin{split} 
+                \text{sub. to }  &y_i \leq y_{i+1} \quad \forall i \\
+                &\forall i < j \\
+                0 \leq &I_{i, j} \leq M b_{i, j} \\
+                (y_i + \dfrac{h_i}{2}) - (y_j - \dfrac{h_j}{2}) \leq &I_{i, j} \leq  (y_i + \dfrac{h_i}{2}) - (y_j - \dfrac{h_j}{2}) + M (1 - b_{i, j}) \\
+                &b_{i, j} \in \{0, 1\}
+                \end{split}$$
+                <p>If we optmize the height \( l' \) of rectangles:</p>
+                $$\min_{y, b, l'} \sum_{i = 1}^n \sum_{j = i + 1}^n \dfrac{d(w_{i, j} - I_{i, j})}{\min \{h_i, h_j\}} + \lambda_1\sum_{i = 1}^n (h_i - h'_i)^2$$
+                $$\begin{split} 
+                \text{sub. to }  &y_i \leq y_{i+1} \quad \forall i \\
+                &\forall i < j \\
+                0 \leq &I_{i, j} \leq M b_{i, j} \\
+                (y_i + \dfrac{h'_i}{2}) - (y_j - \dfrac{h'_j}{2}) \leq &I_{i, j} \leq  (y_i + \dfrac{h'_i}{2}) - (y_j - \dfrac{h'_j}{2}) + M (1 - b_{i, j}) \\
+                &b_{i, j} \in \{0, 1\} \\
+                &\tau_1 h_i \leq h'_i \quad \forall i \\
+                &h'_i \leq \tau_2 h_i \quad \forall i
+                \end{split}$$
+                <p>We can also opt to minimize or not the intersections when there is no intersection between events, changing only the loss function:</p>
+                $$g(x) = \begin{cases} 0 \text{ if } x = 0 \\ 1 \text{ if } x \neq 0 \end{cases}$$
+                $$\min_{y, b, l'} \sum_{i = 1}^n \sum_{j = i + 1}^n \dfrac{d(w_{i, j} - I_{i, j})}{\min \{h_i, h_j\}}g(W_{i,j}) + \lambda_1\sum_{i = 1}^n (h_i - h'_i)^2$$
+            </div>
+            <div id="footer">
+            </div>
+        </div>
+       
+        <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+        <script src="https://d3js.org/d3.v6.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/javascript" src="static/script.js"></script>
+    </body>     
+</html>

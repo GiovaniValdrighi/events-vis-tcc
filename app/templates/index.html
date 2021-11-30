@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <title>Events-Vis</title>
+        <link rel="stylesheet" type="text/css" href="static/style.css"/>
+        <link rel='stylesheet' href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css'/>
+    </head>
+    <body>
+        <div id = "wrap">
+            <div id="header">
+                <div id="title_text">
+                    Events-Vis
+                </div>
+                <div id="dataset_selector">
+                    <select name="dataset" id="dataset" class = "selector">
+                        <option value="traffic_dec_marc_comments">Traffic Dec to Mar</option>
+                        <option value="traffic_february_comments">Traffic February</option>
+                    </select>
+                    <button type = "button" id = "update_dataset">Update dataset</button>
+                </div>
+            </div>
+            <div id="content_top">
+                <div id="top_left">
+                    <div id = "menu">
+                        <div class = "block_title">OPTIONS</div>
+                        <div id = "block_content">
+                            <table id="selectors_table">
+                                <tr>
+                                    <td class = "outer-table">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label for="projection">Projection</label>
+                                                </td>
+                                                <td>
+                                                    <select name="projection" id="projection">
+                                                        <option value="pca">PCA</option>
+                                                        <option value="mds_metric">MDS Metric</option>
+                                                        <option value="mds_non_metric">MDS Non-Metric</option>
+                                                        <option value="hilbert">Hilbert</option>
+                                                        <option value="morton">Morton</option>
+                                                        <option value="tsne">t-SNE</option>
+                                                        <option value="umap">UMAP</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="intersections">Intersections</label>
+                                                </td>
+                                                <td>
+                                                    <select name="intersections" id="intersections">
+                                                        <option value="greedy">Greedy</option>
+                                                        <option value="mixed_integer">Mixed Integer</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class = "outer-table">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label for="simple_time">Simple time</label>
+                                                </td>
+                                                <td>
+                                                    <input type='radio' id='simpe_time' name='time_scale' value='simple_time' checked = "checked"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="time_distortion">Time distortion</label>
+                                                </td>
+                                                <td>
+                                                    <input type='radio' id='time_distortion' name='time_scale' value='time_distortion' />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="time_distortion_fit">Time distortion fit</label>
+                                                </td>
+                                                <td>
+                                                    <input type='radio' id='time_distortion_fit' name='time_scale' value='time_distortion_fit'/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <label for="color_attr">Color by</label>
+                                                </td>
+                                                <td>
+                                                    <select name="color_attr" id="color_attr">
+                                                        <option value="event">Event</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="button" id="preprocess">Preprocess</button>
+                                    </td>
+                                    <td>
+                                        <button type = "button" id = "update">Update</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                        </div>  
+                </div>
+                </div>
+                <div id="top_right">
+                    <div id = "parallel_plot">
+                    </div>
+                </div>
+            </div>
+            <div id ="content_bottom">
+                <div id="bottom_left">
+                    <div id = "main_plot"></div>
+                </div>
+                <div id="bottom_right">
+                    <div id = "data_plot_block">
+                        <div class ="block_title" id = "data_plot_block_title">
+                        </div>
+                        <div id = "data_plot">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+            </div>
+        </div>
+        <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+        <script src="https://d3js.org/d3.v6.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src='static/parallelCoordinates.js' ></script>
+        <script type="text/javascript" src="static/script.js"></script>
+    </body>
+</html>

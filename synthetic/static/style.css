@@ -1,0 +1,158 @@
+body{
+    margin: 0;
+    padding: 0;
+    /*background:#a7a09a;*/
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Divs subdivision */
+
+#wrap{
+    background-color: #f8eee7 !important;
+    width: 1280px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0 auto;
+}
+
+#header{
+    width: 1280px;
+    background-color: #94618e !important;
+    border-bottom: solid 1px #efefef;
+    height: 24px;
+}
+
+#content_top{
+    clear: both;
+    height: 200px;  
+}
+
+#content_bottom{
+    clear: both;
+    height: 400px;
+}
+
+#bottom_left{
+    float: left;
+    height: 400px;
+    width: 410px;
+}
+
+#bottom_right{
+    float: right;
+    height: 400px;
+    width: 780px;
+}
+
+#footer{
+    clear: both;
+    width: 1280px; 
+    height: 15px;
+}
+
+/* Tags configuration */
+
+h1, h2, h3, h4, h5, h6{
+    margin: 0;
+}
+
+/* Title bar */
+
+#title_text{
+    color: #fff;
+    margin: 0;
+    padding-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    float: left;
+}
+
+
+/* Menu */
+
+#menu{
+    background-color: #fff;
+    border: solid 1px #49274a;
+    position: relative;
+    left: 5px;
+    top: 5px;
+    width: 1260px;
+    height: 185px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+#table_methods{
+    height: 90px;
+    overflow-y: auto;
+}
+
+#methods select, input { 
+    width:40px; }
+    
+#methods select:focus {
+    width:auto; }
+
+button{
+    height: 30px;
+    border: solid 1px #dddddd;
+    width: 80px;
+    font-weight: bold;
+}
+
+button:hover{
+    border: solid 2px #909090;
+}
+
+thead, th{
+    border: solid 1px #909090;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+tr{
+    border-bottom: solid 1px #909090;
+}
+
+.td_error{
+    border-left: solid 1px #909090;
+}
+
+/* Data plot */
+
+#data{
+    background-color: #fff;
+    border: solid 1px #49274a;
+    width: 400px;
+    height: 400px;
+    margin-left: 5px;
+    float: left;
+}
+
+/* Result plot */
+
+#results{
+    background-color: #fff;
+    border: solid 1px #49274a;
+    width: 860px;
+    height: 400px;
+    margin-right: 5px;
+    float:right;
+}
+
+
+#text{
+    width: 1265px;
+    margin-left: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    float: left;
+    background-color: #fff;
+    border: solid 1px #49274a;
+}
+
+
+
+
