@@ -1,0 +1,433 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Esta é apenas uma adaptação do ABNTex-2 para ser utilizado como tese ou dissertação de mestrado em inglês.
+% Em resumo, os termos foram adptados para inglês (ex: Orietador se tornou Supervisor) e o modelo de citação, ao invés de 
+% seguir um padrão todo maiusculo, foi trocado para minusculo (ex: FULANO; CICRANO; BELTRANO, 2010 se tornou Fulano, Cicrano, and Beltrano, % % 2010.
+% Você pode se perguntar: Pra que usar o formato ABNT e inglês? Bom, algumas universidades não tem um padrão definido de tese/dissertação,
+% e o ABNTex, com esses ajustes, fica um padrão bacana para ser seguido. Essas alterações visam poupar o seu tempo para configurar um projeto.
+% Por fim, todos os créditos para a equipe que desenvolveu o pacote. Isso é apenas uma adaptação minuscula.
+% Caso você venha a utilizar essa adptação, considere deixar a sua estrelinha para o projeto no Github, 
+% isso valoriza e motiva desenvolvedores.
+% Github: https://github.com/abntex/abntex2
+% Faça bom uso!
+% André Pacheco (pacheco.comp@gmail.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt, openright, oneside, a4paper, english]{abntex2}
+
+
+
+%------------------------------------------------
+%-------------- Pacotes necessários -------------
+%------------------------------------------------
+
+% Escrita 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype} % para melhorias de justificação
+\usepackage{indentfirst}
+
+\renewcommand{\ABNTEXchapterfont}{\fontfamily{ptm}\fontseries{b}\selectfont}
+
+% Gráficos 
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{booktabs}  
+\usepackage{multirow}               %for table
+\usepackage{dcolumn}                %for decimal point align in table
+\usepackage{siunitx}
+
+% Matemáticos 
+\usepackage{amsthm, amssymb, amsmath, mathtools}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\usepackage[ruled,vlined, linesnumbered]{algorithm2e}
+
+% Outros 
+\usepackage{lipsum}
+
+\usepackage[brazil]{babel}
+\addto\captionsbrazil{%
+\def\bibname{References}%
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
+\renewcommand{\listfigurename}{List of Figures}
+\renewcommand{\listtablename}{List of Tables}
+\renewcommand{\contentsname}{Contents}
+\renewcommand\chaptername{Chapter}
+}
+
+\selectlanguage{english}
+
+
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+%\usepackage{backref}	 % Paginas com as citações na bibl
+%\usepackage[alf,abnt-and-type=&]{abntex2cite}	% Citações padrão ABNT
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+
+%\newtheorem{mydef}{Definição}[chapter]
+
+%\usepackage{natbib}
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+%\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+%\renewcommand{\backref}{}
+% Define os textos da citação
+%\renewcommand*{\backrefalt}[4]{
+%	\ifcase #1 %
+%		Nenhuma citação no texto.%
+%	\or
+%		Citado na página #2.%
+%	\else
+%		Citado #1 vezes nas páginas #2.%
+%	\fi}%
+% ---
+
+\newtheorem{name}{Printed output}
+
+\selectlanguage{english}
+\renewcommand{\orientadorname}{Supervisor}
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\input{src/title-page}
+\titulo{Events-Vis: A visual summary of spatio-temporal events that preserves areas and neighborhoods in a 2D plot}
+\autor{Giovani de Almeida Valdrighi}
+\local{Rio de Janeiro}
+\data{2021}
+\instituicao{%
+  Getulio Vargas Foundation \\
+  \par
+  School of Applied Math
+}
+\tipotrabalho{Trabalho de Conclusão de Curso}
+
+\preambulo{Final paper presented for the School of Applied Math (FGV/EMAp) as requirement for the undergraduate degree in Applied Math. \\ \\ Search area: visualization.}
+
+\orientador{Jorge Poco}
+
+% Se o seu texto tem subtítulo. 
+% Se não tiver, altere o arquivo capa_folha_rosto_tex
+%\subtitulo{}
+% ---
+
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+%-----------------------------------------------------
+%--------------------- Margens -----------------------
+%-----------------------------------------------------
+
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+
+%-----------------------------------------------------
+%------ Espaçamentos entre linhas e parágrafos -------
+%-----------------------------------------------------
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% compila o índice
+\makeindex
+
+% ----
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+\pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+\cleardoublepage
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+\input{src/ficha-catalografica}
+
+
+
+% \begin{folhadeaprovacao}
+%\input{src/approval}
+
+
+% ---
+% Declaração de autoria
+% ---
+\newpage
+\begin{center}
+{\ABNTEXchapterfont\Large\textsc{Statement of Authorship}}
+\end{center}
+%
+\vspace*{1cm}
+%
+I hereby declare that the thesis submitted is my own work. All direct or indirect
+sources used are acknowledged as references. I further declare that I have not submitted
+this thesis at any other institution in order to obtain a degree. %\\
+%
+% ---
+
+
+%\newpage
+% ---
+% Dedicatória
+% ---
+%\begin{dedicatoria}
+%  \vspace*{\fill}
+%  \centering
+%  \noindent
+%  \textit{ To my friends and family. I am nothing without them.} \vspace*{\fill}
+%\end{dedicatoria}
+% ---
+
+
+
+% ---
+% Agradecimentos
+% ---
+%\begin{agradecimentos}
+%
+%I would like to thank all people from The Shire, in particular, my beloved nephew Frodo.
+%
+%\end{agradecimentos}
+% ---
+
+%\newpage
+% ---
+% Epígrafe
+% ---
+%\begin{epigrafe}
+%    \vspace*{\fill}
+%	
+%	    \noindent
+%		\textit{"One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them.."}
+%		
+%		\begin{flushright}
+%		J. R. R. Tolkien
+%		\end{flushright}
+%\end{epigrafe}
+
+
+% ---
+\newpage
+
+ 
+
+ 
+\setlength{\absparsep}{18pt} 
+\begin{resumo}[Resumo]
+A análise de grupos em evolução no tempo é uma tarefa essencial no estudo de dados espaço-temporais.
+Esses agrupamentos, geralmente detectados automaticamente, são utilizados para representar eventos  em muitas áreas, como mobilidade humana e surtos epidemiológicos.
+%
+A realização de análises visuais desse tipo de dados é um desafio para as técnicas recentes devido a fatores como extensão espacial, interseções espaciais e evolução temporal.
+%
+Tudo isso faz com que as técnicas baseadas em mapas amplamente utilizadas sofram de excesso de primitivas gráficas e oclusões, portanto, ineficazes para este propósito.
+%
+Já as técnicas de visualização que usam animação ou interatividade para representar as três dimensões, apresentam limitações de interpretação.
+%
+Para superar essas limitações, apresentamos  Events-Vis, um método para visualizar dados de eventos espaço-temporais em um gráfico temporal estático, representando o espaço em uma dimensão. Linearizamos o espaço usando duas estratégias: um algoritmo guloso e uma otimização convexa. Em ambos os casos, nosso objetivo é preservar vizinhanças e intersecções.
+%
+Demonstramos a eficácia do nosso método em uma série de experimentos e um estudo de caso usando conjuntos de dados sintéticos e do mundo real.
+
+ Palavras-chave: visualização, espaço-temporal, agrupamento
+\end{resumo}
+
+% resumo em português
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}[Abstract]
+ \begin{otherlanguage*}{english}
+
+
+\input{src/abstract}
+
+
+\textbf{Keywords:} Visualization, spatiotemporal, clustering
+
+\end{otherlanguage*}
+\end{resumo}
+
+\newpage
+
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+%\begin{siglas}
+  %\item[MSE] Erro médio quadrático
+  %\item[FLR] Relacionamento Lógico Fuzzy
+%\end{siglas}
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ----------------------------------------------------------
+% Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
+% ----------------------------------------------------------
+\chapter{Introduction}
+\input{src/introduction}
+
+\chapter{Background}
+\input{src/background}
+
+\chapter{Methodology}
+\input{thesis/src/methodology}
+
+\chapter{Results}
+\input{thesis/src/results}
+
+
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\citeoption{abnt-etal-list=5}
+\bibliographystyle{abntex2-cite-min}
+\bibliography{references}
+
+
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+%\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+%\partapendices
+
+% ----------------------------------------------------------
+%\chapter{People who have worn the ring}
+% ----------------------------------------------------------
+%\input{src/appendice}
+
+% ----------------------------------------------------------
+%\chapter{Nullam elementum urna vel imperdiet sodales elit ipsum pharetra ligula
+%ac pretium ante justo a nulla curabitur tristique arcu eu metus}
+% ----------------------------------------------------------
+%\lipsum[55-57]
+
+%\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+%\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+%\partanexos
+
+
+%\end{anexosenv}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}

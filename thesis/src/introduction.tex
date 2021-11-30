@@ -1,0 +1,26 @@
+The increase in the use of GPS devices on cars, smartphones, and remote sensors permitted the collection of information about the spatial distribution of entities,
+%
+as this data is collected constantly, the time information of measurements is an important aspect of it.
+%
+\textit{"Spatio-temporal"} refers to the data with both spatial and temporal information, and it can be of different types.
+%
+Different methods of data mining are used to obtain the most important characteristics to analyze the data~\cite{ansari2020spatiotemporal}, and one of the most common is clustering techniques.
+%
+By creating clusters, the data is separated into groups that relate to real events in the observed system, and it is used in many domains such as human mobility, healthcare, seismology, and climate science~\cite{BELHADI2020103857}. 
+%
+
+While these techniques help analysts reveal possible patterns, the spatio-temporal nature and complexity of these clusters make their visual representation challenging. 
+%
+The results will have at least three dimensions, one temporal and two spatial, and may have more information such as categories, labels, requiring techniques to view multivariate data. 
+%
+This problem makes widely used geographic map-based techniques suffer from over-plotting. 
+%
+Space-time Cube, animations, and small-multiples are some of the used methods for spatio-temporal visualization, although, they present some problems of cluttering, overplotting, and cognitive limitations. 
+
+To overcome these limitations, it was developed Events-Vis, a method for the visualization of spatio-temporal events that seek to represent this three-dimensional information in a static temporal plot.
+%
+Focusing on the preservation of areas and neighborhoods of events, we visually approximate the 2D spatial context into a 1D axis by using dimensionality reduction and optimization techniques. 
+
+The organization of this document is: on Section~\ref{ch:background} is presented the already done work in spatio-temporal visualization and a description of projection methods and clustering (to create events), on Section~\ref{ch:methodology} is presented the development of this work, the details of the created visualization technique, the implementation of a web visualization tool and the description of how the method was evaluated, on the last Section~\ref{ch:results} is shown the results obtained from the visualization, presenting the evaluation of the method and a use case on real-world data.
+
+The implementation of the proposed method, with the web interfaces, the data and the experiments are available publicly at~\cite{Giovani2021}.
