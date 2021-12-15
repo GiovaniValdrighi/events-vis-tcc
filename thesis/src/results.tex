@@ -268,19 +268,22 @@ Analyzing this visualization, we have a global overview of the most predominant 
 
 
 \section{Discussion}
+
 As earlier mentioned, the increase in the number of available spatiotemporal data motivates the development of different methods of analysis, including the use the visualizations.
 %
 This data can be in different types, geo-referenced time series, trajectories, events.
 %
 We presented a method for the visualization of events that is able to represent the general spatial and temporal distribution of them.
 %
-However, this restriction of the data type is a limitation to impede the use in many of the common datasets, for example, taxi trips, hurricanes trajectories.
+However, this restriction of the data type is a limitation that impedes the use in many of the common datasets, for example, taxi trips, hurricanes trajectories.
 
-The use of the ST-DBSCAN was also a difficulty of the technique in the generation of the events in the use case dataset.
+%The use of the ST-DBSCAN was also a difficulty of the technique in the generation of the events in the use case dataset.
 %
-It was necessary the test with many combinations of parameters of neighborhood size and minimum number of neighbors to identify a clustering with good interpretability.
+%It was necessary the test with many combinations of parameters of neighborhood size and minimum number of neighbors to identify a clustering with good interpretability.
 %
-On the other hand, it shows that our visualization is really helpful in the analysis of clustering.
+Considering the use-case, the original data was not represented as events, and clustering was used to transform the data, in particular the method ST-DBSCAN.
+%
+In that step, it was demonstrated that our visualization is really helpful in the analysis of clustering.
 %
 In a scenario of the decision of parameters of a clustering method, the different combinations could be evaluated with the results obtained on the plot.
 
@@ -292,8 +295,23 @@ This can be a consideration in future work, and after that, tricks could be used
 
 On the vertical positioning step, the convex optimization method used was not able to surpass the results from the greedy heuristic, also presenting a problem of high processing time.
 %
-On future works, there is the interest in developing new methods for optimizing the representation of intersections, one possibility could relax the constraint of order of events, or even more, do not use the projection step and just apply an optimization.
+In future works, there is an interest in developing new methods for optimizing the representation of intersections.
+%
+In the current version, we keep the order of the events obtained in the projection step, and depending on this order, it may not be possible to represent the intersection of events. 
+%
+Considering the example in Fig.~\ref{fig:discussion-projection-error}, in the first scenario of ordering on A it is possible to fully represent the intersections with no error, however, on the second scenario of ordering, it is not possible to represent the intersection between the purple and red example without making it intersect the blue one. 
+%
+One possibility could be to relax the constraint of the order of events, or even more, do not use the projection step and just apply the optimization.
 
+\begin{figure}
+    \centering
+    \includegraphics[width = \linewidth]{src/imgs/discussion-projection-error.pdf}
+    \caption{Source: elaborated by author. Example of different results depending on the ordering obtained, on A all the intersections can be represented, but with the ordering on B, none of the intersections were represented.}
+    \label{fig:discussion-projection-error}
+\end{figure}
+Lastly, it is necessary to evaluate the results of Events-Vis with users. The interpretability of the 1D representation of the 2D space needs to be evaluated by users that could provide feedback about it.
+%
+The feedback can be used in the improvement of the visualization tool by adding visual clues and panels for interpretability.
 
 \newpage 
 \chapter{Conclusion}
@@ -315,4 +333,6 @@ However, there is space for improvements.
 %
 For instance, we want to consider other optimization methods in the positioning stage, for example, relaxing the constraint to keep the order of events.
 %
-Finally, we want to test our technique using other real datasets.
+There is also the interest to test our technique using other real datasets, such as criminality reports.
+%
+Lastly, a user study is necessary to verify the interpretability of the 1D representation of the spatial distribution of events.
