@@ -1,10 +1,10 @@
-# Events-Vis:: A Visual Summary of Spatio-Temporal Events that Preserves Areas and Neighborhoods in a 2D Plot 
+# Events-Vis: A Visual Summary of Spatio-Temporal Events that Preserves Areas and Neighborhoods in a 2D Plot 
 
 Final project for the bachelor's degree in Applied Mathematics in EMAp FGV. Spatio-temporal data is the set of 3D data with 2 space dimensions and one temporal. This type of data is useful in different domains, and the analysis of clusters is a prevalent task. However, the state-of-the-art techniques used, such as the Space-Time Cube and animations, present limitations when displaying this type of data. It can be caused by distortions of cognitive limitations of tracking changes. For that reason, we present Events-Vis, a visualization technique for Spatio-temporal data. 
 
 The result of Events-Vis is a 2D static plot, with the time in the horizontal direction, and the space is represented in the vertical. In that scenario, the dimension of the space must be transformed from 2D to 1D. We propose a reduction of dimensionality that considers the area of the clusters, their neighborhoods, and the general spatial distribution using a greedy algorithm and a convex optimization method. We also implemented a visualization tool that uses our method and links it with other panels of interactivity. This tool was used in the study case with data from traffic alerts at Rio de Janeiro. The complete discussion about our method is available at the [document](https://github.com/GiovaniValdrighi/events-vis-tcc/blob/main/thesis/Events-Vis.pdf).
 
-![]()
+![Events-Vis](https://raw.githubusercontent.com/GiovaniValdrighi/events-vis-tcc/main/presentations/events-vis.png)
 
 # Files organization
 
@@ -48,7 +48,7 @@ Than just run all the cells on the Notebooks. If you want to use the visualizati
 >
 > python -m flask run
 
-Then enter on the URL at your browser `http://127.0.0.1:5000/index`. If you want to run the evaluation tool, just change the line `cp app'to `cd synthetic`.
+Then enter on the URL at your browser `http://127.0.0.1:5000/index`. If you want to run the evaluation tool, just change the line `cp app` to `cd synthetic`.
 
 
 
